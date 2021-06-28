@@ -80,7 +80,7 @@ textarea {
   width: 1000px;
 }
 
-#hourblock{
+.blockcontainer{
   display: flex ;
   align-items: center;
   margin-top: 20px;
