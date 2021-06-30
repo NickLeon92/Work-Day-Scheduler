@@ -64,18 +64,27 @@ function color(){
     
     for (n = 1; n < 10; n++) {
         timeRef = moment().format()
-        track1 = timeRef.charAt(17)
-        track2 = timeRef.charAt(18)
+        track1 = timeRef.charAt(11)
+        track2 = timeRef.charAt(12)
         compare = track1 + track2
+        console.log(compare)
         elementCall = "div:nth-child(" + n + ")"
         
-        if (n * 10 <= compare) {
+        if (n+8 < compare) {
             
-            $(elementCall).css("background-color", "yellow")
+            $(elementCall).css("background-color", "#d3d3d3")
             container.css("background-color", "white")
         }
+
+        else if (n+8 == compare) {
+            
+            $(elementCall).css("background-color", "#ff6961")
+            container.css("background-color", "white")
+        }
+
+
         else {
-            $(elementCall).css("background-color", "white")
+            $(elementCall).css("background-color", "#77dd77")
             container.css("background-color", "white")
         }
         
