@@ -73,18 +73,21 @@ function color(){
         if (n+8 < compare) {
             
             $(elementCall).css("background-color", "#d3d3d3")
+            $(elementCall).children("textarea").css("background-color", "#d3d3d3")
             container.css("background-color", "white")
         }
 
         else if (n+8 == compare) {
             
             $(elementCall).css("background-color", "#ff6961")
+            $(elementCall).children("textarea").css("background-color", "#ff6961")
             container.css("background-color", "white")
         }
 
 
-        else {
+        else if (n+8 > compare) {
             $(elementCall).css("background-color", "#77dd77")
+            $(elementCall).children("textarea").css("background-color", "#77dd77")
             container.css("background-color", "white")
         }
         
