@@ -38,7 +38,7 @@ function render(){
         blockButton.attr('id','savebutton')
         blockButton.addClass('btn btn-primary mb-3')
         blockButton.text('save')
-        //numbering corrector
+        //numbering generator
         if(i==3){
             blocklTitle.text("12  PM")
         }
@@ -48,7 +48,7 @@ function render(){
         else{
             blocklTitle.text(i+9 + " AM")
         }
-        
+        //append elements into a div that goes into the main container itself
         blockContainer.append(blocklTitle)
         blockContainer.append(blockText)
         blockContainer.append(blockButton)
@@ -56,35 +56,41 @@ function render(){
     }
 }
 
-
+//initialize variables
 let n = 1;
 let elementCall = "div:nth-child(" + n + ")"
 let track1 = 0
 let track2 = 0
 let compare = track1 + track2
 
+//calls coloring function
 color()
+
+//calls function every second in case hour changes while site is in use
 setInterval(color, 1000)
 
+//this function runs through each block to set its color based on the current time
 function color(){
     
     for (n = 1; n < 10; n++) {
+        //this block gets the hour time from the moment.format api
         timeRef = moment().format()
         track1 = timeRef.charAt(11)
         track2 = timeRef.charAt(12)
         compare = track1 + track2
-        console.log(compare)
+    
+        //stores the element corresponding to iteration in loop
         elementCall = "div:nth-child(" + n + ")"
         
         if (n+8 < compare) {
-            
+            //sets the colors to white if the time has already passed this block
             $(elementCall).css("background-color", "#d3d3d3")
             $(elementCall).children("textarea").css("background-color", "#d3d3d3")
             container.css("background-color", "white")
         }
 
         else if (n+8 == compare) {
-            
+            //sets the color to red if the block is the current time
             $(elementCall).css("background-color", "#ff6961")
             $(elementCall).children("textarea").css("background-color", "#ff6961")
             container.css("background-color", "white")
@@ -92,6 +98,7 @@ function color(){
 
 
         else if (n+8 > compare) {
+            //sets color to green if the block is in the future still
             $(elementCall).css("background-color", "#77dd77")
             $(elementCall).children("textarea").css("background-color", "#77dd77")
             container.css("background-color", "white")
@@ -99,26 +106,20 @@ function color(){
         
     }
 }
-
+//stores elements for input text area and save buttons
 var button = $('button')
 var content = $('#exampleFormControlTextarea1')
-// button.on('click', function () {
-    //     console.log("asdfa")
-    // });
     
-    
+//runs function for save button so that when clicked, saves data on that given block
 button.on("click", function (event) {
     event.preventDefault()
+    //stores the sibling textarea for a given save button
     var test = $(this).siblings('textarea').val();
+    //stores how far down the list the parent div is
     var blocknum = $(this).parent().index()
-    console.log(test)
-    console.log(blocknum)
-
+    //updates data array with new saved data
     textarray.splice(blocknum, 1, test)
-    console.log(textarray)
-    
+    //stores the updated data array in local storage
     localStorage.setItem("data",JSON.stringify(textarray))
 
 })
-
-    // var set = localStorage.getItem("data")
